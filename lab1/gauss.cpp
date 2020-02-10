@@ -3,42 +3,57 @@
 
 matrix data_input(matrix matrix)
 {
-  cout << "x1 value: ";
-  cin >> matrix.x1;
+  bool data_validation = false;
 
-  cout << "x2 value: ";
-  cin >> matrix.x2;
+  while (data_validation == false)
+  {
+    cout << "x1 value: ";
+    cin >> matrix.x1;
 
-  cout << "x3 value: ";
-  cin >> matrix.x3;
+    cout << "x2 value: ";
+    cin >> matrix.x2;
 
-  cout << "First equation result: ";
-  cin >> matrix.Xrezult;
+    cout << "x3 value: ";
+    cin >> matrix.x3;
 
-  cout << "y1 value: ";
-  cin >> matrix.y1;
+    cout << "First equation result: ";
+    cin >> matrix.Xrezult;
 
-  cout << "y2 value: ";
-  cin >> matrix.y2;
+    cout << "y1 value: ";
+    cin >> matrix.y1;
 
-  cout << "y3 value: ";
-  cin >> matrix.y3;
+    cout << "y2 value: ";
+    cin >> matrix.y2;
 
-  cout << "Second equation result: ";
-  cin >> matrix.Yrezult;
+    cout << "y3 value: ";
+    cin >> matrix.y3;
 
-  cout << "z1 value: ";
-  cin >> matrix.z1;
+    cout << "Second equation result: ";
+    cin >> matrix.Yrezult;
 
-  cout << "z2 value: ";
-  cin >> matrix.z2;
+    cout << "z1 value: ";
+    cin >> matrix.z1;
 
-  cout << "z3 value: ";
-  cin >> matrix.z3;
+    cout << "z2 value: ";
+    cin >> matrix.z2;
 
-  cout << "Third equation result: ";
-  cin >> matrix.Zrezult;
+    cout << "z3 value: ";
+    cin >> matrix.z3;
 
+    cout << "Third equation result: ";
+    cin >> matrix.Zrezult;
+
+    if (cin.fail()) {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+      system("clear");
+      cout << endl << "Just numbers!" << endl << endl;
+    }
+    else {
+      data_validation = true;
+    }
+  }
   return matrix;
 }
 
