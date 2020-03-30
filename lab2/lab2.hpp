@@ -24,4 +24,4 @@ matrix test_data3(matrix matrix);
 matrix test_data4(matrix matrix);
 
 void process(matrix matrix);
-matrix seidel_conversion(matrix matrix);
+double rounding(double x);

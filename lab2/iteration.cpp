@@ -3,20 +3,20 @@
 
 matrix test_data1(matrix matrix)
 {
-  matrix.x1 = 4;
-  matrix.y1 = 4;
-  matrix.z1 = 4;
-  matrix.FirstRezult = 4;
+  matrix.x1 = 3.6;
+  matrix.y1 = 1.8;
+  matrix.z1 = -4.7;
+  matrix.FirstRezult = 3.8;
 
-  matrix.x2 = 4;
-  matrix.y2 = 4;
-  matrix.z2 = 4;
-  matrix.SecondRezult = 4;
+  matrix.x2 = 2.7;
+  matrix.y2 = -3.6;
+  matrix.z2 = 1.9;
+  matrix.SecondRezult = 0.4;
 
-  matrix.x3 = 4;
-  matrix.y3 = 4;
-  matrix.z3 = 4;
-  matrix.ThirdRezult = 4;
+  matrix.x3 = 1.5;
+  matrix.y3 = 4.5;
+  matrix.z3 = 3.3;
+  matrix.ThirdRezult = -1.6;
 
   return matrix;
 }
@@ -161,6 +161,14 @@ int check_data(matrix matrix)
 }
 
 
+double rounding(double x)
+{
+  x = round(x * 100) / 100;
+
+  return x;
+}
+
+
 void process(matrix matrix)
 {
   if (check_data(matrix) == 1) {
@@ -183,11 +191,12 @@ void process(matrix matrix)
   bool IsCompleted = false;
   int iteration_counter = 1;
 
+
   while (IsCompleted != true)
   {
-    x = round(x * 100) / 100;
-    y = round(y * 100) / 100;
-    z = round(z * 100) / 100;
+    x = rounding(x);
+    y = rounding(y);
+    z = rounding(z);
 
     cout << "x: " << x << "\t";
     cout << "y: " << y << "\t";
@@ -200,9 +209,13 @@ void process(matrix matrix)
     PreviousY = y;
     PreviousZ = z;
 
+    // x = (matrix.y1 * PreviousY - matrix.z1 * PreviousZ + matrix.FirstRezult) / matrix.x1;
+    // y = (matrix.x2 * PreviousX - matrix.z2 * PreviousZ + matrix.SecondRezult) / matrix.y2;
+    // z = (matrix.x3 * PreviousX - matrix.y3 * PreviousY + matrix.ThirdRezult) / matrix.z3;
+
     x = (matrix.y1 * PreviousY - matrix.z1 * PreviousZ + matrix.FirstRezult) / matrix.x1;
-    y = (matrix.x2 * PreviousX - matrix.z2 * PreviousZ + matrix.SecondRezult) / matrix.y2;
-    z = (matrix.x3 * PreviousX - matrix.y3 * PreviousY + matrix.ThirdRezult) / matrix.z3;
+    y = (matrix.x2 * x - matrix.z2 * PreviousZ + matrix.SecondRezult) / matrix.y2;
+    z = (matrix.x3 * x - matrix.y3 * y + matrix.ThirdRezult) / matrix.z3;
 
     iteration_counter++;
   }
