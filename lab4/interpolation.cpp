@@ -77,7 +77,7 @@ void newton_interpolation(points obj)
   }
 
   for (int j = i, k = 0, t = 2, p = 1; j < total_l; j++, k++) {
-    if (obj.x[k + t] - obj.x[k]) {
+    if (obj.x[k + t] - obj.x[k] == 0) {
       cout << "incorrect points" << endl;
       return;
     }
