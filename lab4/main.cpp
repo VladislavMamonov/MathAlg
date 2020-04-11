@@ -1,41 +1,58 @@
 #include "interpolation.hpp"
 
+double x = 1;
+
 
 points test_data(points obj)
 {
-  // obj.x[0] = -1.5;
-  // obj.x[1] = -0.75;
-  // obj.x[2] = 0;
-  // obj.x[3] = 0.75;
-  // obj.x[4] = 1.5;
-  //
-  // obj.Fx[0] = -14.1014;
-  // obj.Fx[1] = -0.931596;
-  // obj.Fx[2] = 0;
-  // obj.Fx[3] = 0.931596;
-  // obj.Fx[4] = 14.1014;
+  obj.k = 1;
+  obj.m = 0;
+
+  obj.tPoint = 2;
+
+  // obj.x[0] = 1;
+  // obj.x[1] = 3;
   //
   // obj.tPoint = 0.5;
 
 
-  // obj.x[0] = 1;
-  // obj.x[1] = 5;
+  // obj.x[0] = -2;
+  // obj.x[1] = 0;
+  // obj.x[2] = 2;
   //
-  // obj.Fx[0] = 3;
-  // obj.Fx[1] = 6;
-  //
-  // obj.tPoint = 3;
+  // obj.tPoint = 0.5;
 
+  if (obj.k == sin(x)) {
+    for (int i = 0; i < TOTAL_POINTS; i++)
+      obj.Fx[i] = x * sin(obj.x[i]) + obj.m;
+    return obj;
+  }
 
-  obj.x[0] = -2;
-  obj.x[1] = 0;
-  obj.x[2] = 2;
+  if (obj.k == cos(x)) {
+    for (int i = 0; i < TOTAL_POINTS; i++)
+      obj.Fx[i] = x * cos(obj.x[i]) + obj.m;
+    return obj;
+  }
 
-  obj.Fx[0] = 10;
-  obj.Fx[1] = 0;
-  obj.Fx[2] = 7;
+  if (obj.k == tan(x)) {
+    for (int i = 0; i < TOTAL_POINTS; i++)
+      obj.Fx[i] = x * tan(obj.x[i]) + obj.m;
+    return obj;
+  }
 
-  obj.tPoint = 1.5;
+  if (obj.k == log(x)) {
+    for (int i = 0; i < TOTAL_POINTS; i++) {
+      if (obj.x[i] <= 0) {
+        cout << "incorrect points (log(x), x <= 0)" << endl;
+        exit(1);
+      }
+      obj.Fx[i] = x * log(obj.x[i]) + obj.m;
+    }
+    return obj;
+  }
+
+  for (int i = 0; i < TOTAL_POINTS; i++)
+    obj.Fx[i] = pow(obj.tPoint, 3) + 1;
 
   return obj;
 }
@@ -44,7 +61,7 @@ points test_data(points obj)
 int main()
 {
   points obj = test_data(obj);
-  newton_interpolation(obj);
+  lagrange_interpolation(obj);
 
   return 0;
 }

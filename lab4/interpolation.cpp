@@ -25,6 +25,10 @@ void lagrange_interpolation(points obj)
 
     for (int j = 0; j < TOTAL_POINTS; j++) {
       if (j == i) { l_part[j] = 1; continue; }
+      if (obj.x[i] - obj.x[j] == 0) {
+        cout << "incorrect points" << endl;
+        return;
+      }
       l_part[j] = (x - obj.x[j]) / (obj.x[i] - obj.x[j]);
     }
 
@@ -64,10 +68,19 @@ void newton_interpolation(points obj)
 
   int i;
 
-  for (i = 0; i < l_checkpoint[0]; i++)
+  for (i = 0; i < l_checkpoint[0]; i++) {
+    if (obj.x[i + 1] - obj.x[i] == 0) {
+      cout << "incorrect points" << endl;
+      return;
+    }
     l[i] = (obj.Fx[i + 1] - obj.Fx[i]) / (obj.x[i + 1] - obj.x[i]);
+  }
 
   for (int j = i, k = 0, t = 2, p = 1; j < total_l; j++, k++) {
+    if (obj.x[k + t] - obj.x[k]) {
+      cout << "incorrect points" << endl;
+      return;
+    }
     if (j == l_checkpoint[p]) t++, p++, k = 0;
     l[j] = (l[k + 1] - l[k]) / (obj.x[k + t] - obj.x[k]);
   }
